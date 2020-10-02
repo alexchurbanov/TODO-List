@@ -1,0 +1,163 @@
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: -webkit-gradient(linear, left top, right top, from(#1600a8), to(#4a55b3));
+  background: linear-gradient(90deg, #1600a8 0%, #4a55b3 100%);
+  font-family: "Lato";
+  color: white;
+}
+
+.wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+h1 {
+  font-weight: 900;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 700;
+  text-align: center;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+input::-webkit-input-placeholder {
+  color: #e2e2e2;
+}
+
+input::-moz-placeholder {
+  color: #e2e2e2;
+}
+
+input:-ms-input-placeholder {
+  color: #e2e2e2;
+}
+
+input::-ms-input-placeholder {
+  color: #e2e2e2;
+}
+
+input::placeholder {
+  color: #e2e2e2;
+}
+
+.todo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  width: 520px;
+  min-height: 600px;
+  background: #161a2b;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding-bottom: 32px;
+}
+
+button {
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: -webkit-gradient(linear, left top, right top, from(#5d0cff), to(#9b00fa));
+  background: linear-gradient(90deg, #5d0cff 0%, #9b00fa 100%);
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.todo__form {
+  padding: 0 5px;
+  margin-bottom: 20px;
+}
+
+.todo__form_input {
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  width: 320px;
+  background: transparent;
+  color: #fff;
+}
+
+.todo__form_cancel_button, .task__remove_button {
+  margin-left: 5px;
+  border-radius: 4px;
+  padding: 10px;
+  background: -webkit-gradient(linear, left top, right top, from(#4b0404), to(#690000));
+  background: linear-gradient(90deg, #4b0404 0%, #690000 100%);
+}
+
+.task__check_button {
+  margin: 0 5px 0 auto;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.task__edit_button {
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.task, .task-done {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 4px auto;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, from(#ff7614), to(#ff5411));
+  background: linear-gradient(90deg, #ff7614 0%, #ff5411 100%);
+  padding: 16px;
+  border-radius: 5px;
+  width: 90%;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.task-done span {
+  text-decoration: line-through;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) */

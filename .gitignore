@@ -1,0 +1,12 @@
+# BACKEND
+backend/
+
+# FRONTEND
+
+src/
+node_modules/
+
+#build files
+gulpfile.js
+webpack.config.js
+package-lock.json
