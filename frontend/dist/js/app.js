@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import ToDoForm from './components/ToDoForm';
 import ToDoItem from './components/ToDoItem';
+import postData from './requests';
 
+const url = "http://127.0.0.1:8000/"
+const tasksApi = "tasks/"
 
 export default class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            tasks: []
+            tasks: [],
+            isLoading: true,
         }
         this.handleDoneChage = this.handleDoneChage.bind(this);
         this.handleTaskAdd = this.handleTaskAdd.bind(this);
@@ -16,55 +20,80 @@ export default class App extends Component {
         this.handleTaskRemove = this.handleTaskRemove.bind(this);
     }
 
-    handleDoneChage(taskId) {
-        this.setState(state => {
-            return (
-                state.tasks.map(task => {
-                    if (task.id === taskId) {
-                        task.done = !task.done;
-                    }
+    componentDidMount() {
+        this.setState({ isLoading: true });
+
+        fetch(url + tasksApi)
+            .then(response => response.json())
+            .then(data => this.setState({ tasks: data, isLoading: false }))
+            .catch(error => this.setState({ isLoading: false }));
+    }
+
+    handleDoneChage(taskId, flag) {
+        postData(url + tasksApi + taskId + '/', { done: flag }, 'PATCH')
+            .then(() =>
+                this.setState(state => {
+                    return (
+                        state.tasks.map(task => {
+                            if (task.id === taskId) {
+                                task.done = flag;
+                            }
+                        })
+                    )
                 })
             )
-        })
     }
 
     handleTaskEdit(taskId, newTitle) {
-        this.setState(state => {
-            return (
-                state.tasks.map(task => {
-                    if (task.id === taskId) {
-                        task.title = newTitle;
-                    }
+        postData(url + tasksApi + taskId + '/', { title: newTitle }, 'PATCH')
+            .then(() =>
+                this.setState(state => {
+                    return (
+                        state.tasks.map(task => {
+                            if (task.id === taskId) {
+                                task.title = newTitle;
+                            }
+                        })
+                    )
                 })
             )
-        })
     }
 
     handleTaskAdd(task) {
-        this.setState(state => {
-            return ({
-                tasks: [...state.tasks, {
-                    id: Math.floor(Math.random() * 10000),
-                    title: task,
-                    done: false
-                }]
-            })
-        })
+        postData(url + tasksApi, { title: task })
+            .then(data => this.setState(state => {
+                return ({
+                    tasks: [...state.tasks, data]
+                })
+            }))
     }
 
-    handleTaskRemove(taskID){
-        this.setState(state => {
-            return({
-                tasks: state.tasks.filter(task => task.id !== taskID)
-            })
-        })
+    handleTaskRemove(taskID) {
+        fetch(url + tasksApi + taskID + '/', { method: 'DELETE' })
+            .then(response => {
+                if (response.status == 204) {
+                    this.setState(state => {
+                        return ({
+                            tasks: state.tasks.filter(task => task.id !== taskID)
+                        })
+                    });
+                }
+            });
+
     }
 
     render() {
-        const { tasks } = this.state;
+        const { tasks, isLoading, error } = this.state;
         const tasksDone = tasks.filter(task => task.done !== false);
         const taskNotDone = tasks.filter(task => task.done !== true);
         const tasksList = [...taskNotDone, ...tasksDone];
+
+        if (isLoading) {
+            return (
+                <div className="todo">
+                    <p>Loading...</p>
+                </div>)
+        }
 
         return (
             <div className="todo">

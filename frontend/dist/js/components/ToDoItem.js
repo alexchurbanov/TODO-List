@@ -15,7 +15,7 @@ export default class ToDoItem extends Component {
     }
 
     handleDone(e) {
-        this.props.onDoneChange(this.state.task.id);
+        this.props.onDoneChange(this.state.task.id, !this.state.task.done);
     }
 
     handleEdit(value) {

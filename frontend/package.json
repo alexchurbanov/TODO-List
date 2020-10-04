@@ -37,5 +37,7 @@
     "> 0.2%",
     "IE 11"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "regenerator-runtime": "^0.13.7"
+  }
 }
